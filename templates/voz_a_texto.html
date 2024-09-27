@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GentleMail</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon_page.png') }}" type="image/png">
+</head>
+<body>
+
+    <h2>Voz a Texto</h2>
+    <button id="start-btn">Iniciar Grabación</button>
+    <button id="stop-btn">Detener Grabación</button>
+    <p><strong>Tu grabación fue:</strong></p>
+    <div id="output"></div>
+
+    <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>
+
+</body>
+</html>

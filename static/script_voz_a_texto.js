@@ -1,6 +1,10 @@
-const startBtn = document.getElementById('start-btn');
-const stopBtn = document.getElementById('stop-btn');
+const recordingDiv = document.getElementById('recordingDiv')
+const resultDiv = document.getElementById('resultDiv')
+const recordingBtn = document.getElementById('start-btn');
+const generateBtn = document.getElementById('generate-btn');
 const outputDiv = document.getElementById('output');
+const listeningStatus = document.getElementById('listeningStatusText')
+const errorDiv = document.getElementById('errorAlert')
 
 if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
     outputDiv.textContent = 'Tu navegador no soporta la Web Speech API para reconocimiento de voz.';
@@ -12,11 +16,12 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
     recognition.interimResults = false; 
     recognition.continuous = true;  
 
-    let finalTranscript = '';  
+    let finalTranscript = '';
+    let isRecording = false;
 
     recognition.onresult = function(event) {
         let interimTranscript = ''; 
-        
+        errorDiv.style ="display: none"
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
@@ -26,16 +31,34 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
             }
         }
 
-        outputDiv.innerHTML = `<br/><strong>Tu grabación:</strong> ${finalTranscript}`;
+        outputDiv.innerHTML = `${finalTranscript}`;
     };
 
     recognition.onerror = function(event) {
-        outputDiv.textContent = 'Error al reconocer el audio: ' + event.error;
+        errorDiv.textContent = 'Error recognizing audio: '+ event.error;
+        errorDiv.style ="display: block"
     };
 
-    startBtn.addEventListener('click', function() {
-        recognition.start();
-        outputDiv.textContent = 'Escuchando...';
+    recordingBtn.addEventListener('click', function() {
+        if(isRecording){
+            isRecording = false;
+            recordingBtn.style = "background: #3B82F6"
+            recordingBtn.innerHTML = "🎤 Start Recording"
+            listeningStatus.innerHTML = 'Not Listening';
+            recognition.stop();
+        }else{
+            isRecording = true;
+            recordingBtn.style = "background: #EF4444"
+            recordingBtn.innerHTML = "Stop Recording"
+            listeningStatus.innerHTML = 'Listening...';
+            recognition.start();
+        }
+    });
+
+    generateBtn.addEventListener('click', function() {
+        console.log("presionado")
+        recordingDiv.style = "display: none"
+        resultDiv.style = "display: block"
     });
 
 }

@@ -62,19 +62,26 @@
     <div
       id="recordingDiv"
       style="display: none"
-      class="h-screen lg:h-3/4 p-10 lg:w-5/6 border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+      class="h-screen lg:h-3/4 p-10 lg:w-5/6 border-gray-200 border-solid rounded-lg shadow-xl bg-white overflow-auto"
     >
       <div
         class="lg:h-full flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-10"
       >
         <div class="w-full flex flex-col justify-around">
-          <h1
-            class="text-4xl font-bold mb-4 lg:mb-10 text-blue-500 text-center"
-          >
-            <em><bold>GentleMail</bold></em>
-          </h1>
+          <div>
+            <h1
+              class="text-4xl font-bold mb-4 lg:mb-4 text-blue-500 text-center"
+            >
+              <em><bold>GentleMail</bold></em>
+            </h1>
+            <p class="text-center px-0 lg:px-20 mb-4 lg:mb-0">
+              Discover GentleMail, an innovative tool that transforms your words
+              into text quickly and easily formal mail.
+            </p>
+          </div>
           <div>
             <div class="flex justify-around items-center mb-4">
+              
               <button
                 id="start-btn"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
@@ -106,30 +113,28 @@
               id="generate-btn"
               class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
             >
-              ✉️ Generate Emails
+              ✉️ Generate Mails
             </button>
           </div>
         </div>
         <div
           class="lg:w-2/4 flex flex-col lg:flex-wrap justify-center lg:mb-0 lg:mt-0 lg:p-10 lg:py-4 lg:border lg:border-solid lg:rounded-lg lg:shadow-lg"
         >
-          <h2 class="text-blue-500 text-center">
-            <strong>How to Use</strong>
-          </h2>
-          <div class="space-y-6">
-            <p class="text-center">
-              Discover GentleMail, an innovative tool that transforms your words
-              into text quickly and easily formal mail.
-            </p>
-            <p class="text-center"></p>
-              Simply press the button <strong> "🎤 Start Recording"</strong> to begin
-            </p>
-            <p class="text-center">
-              When you're finished, just click
-              <strong>"Stop Recording"</strong> and review your text. Then,
-              click <strong>"✉️ Generate Mail"</strong> to create your new
-              formal email, ready to send
-            </p>
+          <div>
+            <h2 class="text-blue-500 text-center text-4xl mb-6">
+              <strong>How to Use</strong>
+            </h2>
+            <div class="space-y-6">
+              <p class="text-center">
+                Press the button <strong> "🎤 Start Recording"</strong> to start recording
+              </p>
+              <p class="text-center">
+                When you're finished, just click <strong>"Stop Recording"</strong> and review your text, you can edit it.
+              </p>
+              <p class="text-center">
+                Then, click <strong>"✉️ Generate Mails"</strong> to create your new formal email, ready to send
+              </p>
+          </div>
           </div>
         </div>
       </div>
@@ -141,7 +146,7 @@
       class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
     >
       <div class="card-header">
-        <h2 class="card-title">Generated Mail</h2>
+        <h2 class="card-title">Generated Mails</h2>
       </div>
       <div class="card-content">
         <textarea

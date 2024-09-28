@@ -1,20 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GentleMail</title>
-    <link rel="icon" href="{{ url_for('static', filename='icon_page.png') }}" type="image/png">
-</head>
-<body>
-
-    <h2>Voz a Texto</h2>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='icon_page.png') }}"
+      type="image/png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- <h2>Voz a Texto</h2>
     <button id="start-btn">Iniciar Grabación</button>
     <button id="stop-btn">Detener Grabación</button>
     <p><strong>Tu grabación fue:</strong></p>
-    <div id="output"></div>
+    <div id="output"></div> -->
+    <div
+      class="w-screen h-screen flex items-center bg-gradient-to-r from-blue-500 to-green-500"
+    >
+      <!-- recording div -->
+      <div
+        id="recordingDiv"
+        class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+      >
+        <h1 class="text-4xl font-bold mb-4 text-blue-500 text-center">
+          <em><bold>GentleMail</bold></em>
+        </h1>
 
+        <div class="card mb-4">
+          <div class="card-header flex flex-col justify-center mb-10 mt-10">
+            <h2 class="card-title text-blue-500 text-center">
+              <strong>How to Use</strong>
+            </h2>
+            <div class="space-y-6">
+              <p class="text-center">
+                Discover GentleMail, an innovative tool that transforms your
+                words into text quickly and easily. Simply press the button
+                <strong> "🎤 Start Recording"</strong> to begin
+              </p>
+              <p class="text-center">
+                When you're finished, just click
+                <strong>"Stop Recording"</strong> and review your text. Then,
+                click <strong>"✉️ Generate Email"</strong> to create your new
+                formal email, ready to send
+              </p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="flex justify-between items-center mb-4">
+              <button
+                id="start-btn"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              >
+                <span id="listeningStatus">🎤 Start Recording</span>
+              </button>
+              <span
+                class="text-sm text-muted-foreground"
+                id="listeningStatusText"
+              >
+                Not listening
+              </span>
+            </div>
+            <textarea
+              id="output"
+              placeholder="Your speech will appear here..."
+              rows="5"
+              class="w-full p-2 mb-4 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
+            ></textarea>
+            <div class="w-full flex justify-center">
+              <button
+                id="generate-btn"
+                class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
+              >
+                ✉️ Generate Emails
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          id="errorAlert"
+          class="text-red-500 mt-6 text-center"
+          role="alert"
+          style="display: none"
+        >
+          Error message goes here
+        </div>
+      </div>
+      <!-- results -->
+      <div
+        id="resultDiv"
+        style="display: none"
+        class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+      >
+        <div class="card-header">
+          <h2 class="card-title">Generated Email</h2>
+        </div>
+        <div class="card-content">
+          <textarea
+            id="generatedEmailTextarea"
+            rows="10"
+            readonly
+            class="w-full p-2"
+          ></textarea>
+        </div>
+      </div>
+    </div>
     <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>
-
-</body>
+  </body>
 </html>

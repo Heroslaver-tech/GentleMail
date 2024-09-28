@@ -13,52 +13,68 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
   </head>
-  <body>
+  <body
+    class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-green-500"
+  >
     <!-- <h2>Voz a Texto</h2>
     <button id="start-btn">Iniciar Grabación</button>
     <button id="stop-btn">Detener Grabación</button>
     <p><strong>Tu grabación fue:</strong></p>
     <div id="output"></div> -->
-    <div
-      class="w-screen h-screen flex items-center bg-gradient-to-r from-blue-500 to-green-500"
-    >
-      <!-- recording div -->
-      <div
-        id="recordingDiv"
-        class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
-      >
-        <h1 class="text-4xl font-bold mb-4 text-blue-500 text-center">
-          <em><bold>GentleMail</bold></em>
-        </h1>
 
-        <div class="card mb-4">
-          <div class="card-header flex flex-col justify-center mb-10 mt-10">
-            <h2 class="card-title text-blue-500 text-center">
-              <strong>How to Use</strong>
-            </h2>
-            <div class="space-y-6">
-              <p class="text-center">
-                Discover GentleMail, an innovative tool that transforms your
-                words into text quickly and easily. Simply press the button
-                <strong> "🎤 Start Recording"</strong> to begin
-              </p>
-              <p class="text-center">
-                When you're finished, just click
-                <strong>"Stop Recording"</strong> and review your text. Then,
-                click <strong>"✉️ Generate Email"</strong> to create your new
-                formal email, ready to send
-              </p>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="flex justify-between items-center mb-4">
+    <!-- present div -->
+    <div
+      id="presentDiv"
+      class="h-screen lg:h-auto flex justify-between p-10 max-w-6xl border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+    >
+      <div class="flex justify-around flex-col lg:flex-row items-center">
+        <div
+          id="panel"
+          class="flex flex-col justify-center items-center mb-10 lg:mb-0"
+        >
+          <h1
+            class="text-4xl lg:text-8xl font-bold mb-4 text-blue-500 text-center"
+          >
+            <em><bold>GentleMail</bold></em>
+          </h1>
+          <p class="text-center mt-6">
+            Transform your <strong>voice</strong> into perfect formal
+            <strong>mails</strong>
+          </p>
+          <button
+            id="next-btn"
+            class="w-auto lg:w-2/4 mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          >
+            <span id="listeningStatus">All in one click</span>
+          </button>
+        </div>
+        <div class="flex flex-wrap">
+          <img
+            src="/static/imageLanding.png"
+            width="600"
+            height="600"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- recording div -->
+    <div
+      id="recordingDiv"
+      style="display: none"
+      class="h-screen lg:h-3/4 p-10 lg:w-5/6 border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+    >
+      <div
+        class="lg:h-full flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-10"
+      >
+        <div class="w-full flex flex-col justify-around">
+          <h1
+            class="text-4xl font-bold mb-4 lg:mb-10 text-blue-500 text-center"
+          >
+            <em><bold>GentleMail</bold></em>
+          </h1>
+          <div>
+            <div class="flex justify-around items-center mb-4">
               <button
                 id="start-btn"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
@@ -76,46 +92,65 @@
               id="output"
               placeholder="Your speech will appear here..."
               rows="5"
-              class="w-full p-2 mb-4 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
+              class="w-full p-2 mb-4 lg:mb-0 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
             ></textarea>
-            <div class="w-full flex justify-center">
-              <button
-                id="generate-btn"
-                class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
-              >
-                ✉️ Generate Emails
-              </button>
+            <div
+              id="errorAlert"
+              class="text-red-500 mt-6 text-center"
+              role="alert"
+            >
             </div>
+          </div>
+          <div class="flex justify-center">
+            <button
+              id="generate-btn"
+              class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
+            >
+              ✉️ Generate Emails
+            </button>
           </div>
         </div>
         <div
-          id="errorAlert"
-          class="text-red-500 mt-6 text-center"
-          role="alert"
-          style="display: none"
+          class="lg:w-2/4 flex flex-col lg:flex-wrap justify-center lg:mb-0 lg:mt-0 lg:p-10 lg:py-4 lg:border lg:border-solid lg:rounded-lg lg:shadow-lg"
         >
-          Error message goes here
-        </div>
-      </div>
-      <!-- results -->
-      <div
-        id="resultDiv"
-        style="display: none"
-        class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
-      >
-        <div class="card-header">
-          <h2 class="card-title">Generated Email</h2>
-        </div>
-        <div class="card-content">
-          <textarea
-            id="generatedEmailTextarea"
-            rows="10"
-            readonly
-            class="w-full p-2"
-          ></textarea>
+          <h2 class="text-blue-500 text-center">
+            <strong>How to Use</strong>
+          </h2>
+          <div class="space-y-6">
+            <p class="text-center">
+              Discover GentleMail, an innovative tool that transforms your words
+              into text quickly and easily. Simply press the button
+              <strong> "🎤 Start Recording"</strong> to begin
+            </p>
+            <p class="text-center">
+              When you're finished, just click
+              <strong>"Stop Recording"</strong> and review your text. Then,
+              click <strong>"✉️ Generate Mail"</strong> to create your new
+              formal email, ready to send
+            </p>
+          </div>
         </div>
       </div>
     </div>
+    <!-- results -->
+    <div
+      id="resultDiv"
+      style="display: none"
+      class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+    >
+      <div class="card-header">
+        <h2 class="card-title">Generated Mail</h2>
+      </div>
+      <div class="card-content">
+        <textarea
+          id="generatedEmailTextarea"
+          rows="10"
+          readonly
+          class="w-full p-2"
+        ></textarea>
+      </div>
+    </div>
+
     <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>
   </body>
 </html>

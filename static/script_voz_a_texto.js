@@ -1,5 +1,7 @@
 const recordingDiv = document.getElementById('recordingDiv')
+const presentDiv = document.getElementById('presentDiv')
 const resultDiv = document.getElementById('resultDiv')
+const nextBtn = document.getElementById('next-btn');
 const recordingBtn = document.getElementById('start-btn');
 const generateBtn = document.getElementById('generate-btn');
 const outputDiv = document.getElementById('output');
@@ -36,8 +38,12 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
 
     recognition.onerror = function(event) {
         errorDiv.textContent = 'Error recognizing audio: '+ event.error;
-        errorDiv.style ="display: block"
     };
+
+    nextBtn.addEventListener('click', function() {
+        presentDiv.style = "display: none"
+        recordingDiv.style = "display: block"
+    });
 
     recordingBtn.addEventListener('click', function() {
         if(isRecording){
@@ -56,9 +62,10 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
     });
 
     generateBtn.addEventListener('click', function() {
-        console.log("presionado")
-        recordingDiv.style = "display: none"
-        resultDiv.style = "display: block"
+        if(outputDiv.value.trim() != ""){
+            recordingDiv.style = "display: none"
+            resultDiv.style = "display: block"
+        }
     });
 
 }

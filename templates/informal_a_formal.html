@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GentleMail</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='informal_a_formal.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="title" onclick="window.location.href='/'">GentleMail</div>
+    <div class="options">
+      <div class="option" id="option1">
+        <div class="option-title">Option 1</div>
+        <div class="gray-box"></div>
+        <div class="button-container">
+          <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 1')">
+          <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 1')">
+        </div>
+      </div>
+      <div class="option" id="option2">
+        <div class="option-title">Option 2</div>
+        <div class="gray-box"></div>
+        <div class="button-container">
+          <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 2')">
+          <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 2')">
+        </div>
+      </div>
+      <div class="option" id="option3">
+        <div class="option-title">Option 3</div>
+        <div class="gray-box"></div>
+        <div class="button-container">
+          <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 3')">
+          <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 3')">
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button class="button write" onclick="window.location.href='/'">Write other mail</button>
+      <button class="button regenerate">Regenerate</button>
+
+    </div>
+  </div>
+
+  <script>
+    function redirectToMessage(message) {
+      window.location.href = `/mensaje?text=${encodeURIComponent(message)}`;
+    }
+
+    function copyMessage(message) {
+      navigator.clipboard.writeText(message).then(() => {
+        alert('Mensaje copiado al portapapeles');
+      });
+    }
+  </script>
+</body>
+</html>

@@ -34,7 +34,7 @@
           class="flex flex-col justify-center items-center mb-10 lg:mb-0"
         >
           <h1
-            class="text-4xl lg:text-8xl font-bold mb-4 text-blue-500 text-center"
+            class="text-3xl lg:text-8xl font-bold mb-4 text-blue-500 text-center"
           >
             <em><bold>GentleMail</bold></em>
           </h1>
@@ -112,6 +112,7 @@
             <button
               id="generate-btn"
               class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
+              onclick="window.location.href='/procesamiento'"
             >
               ✉️ Generate Mails
             </button>
@@ -145,17 +146,12 @@
       style="display: none"
       class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
     >
-      <div class="card-header">
+    <div class="card-header"
+    >
+      <a href="/procesamiento">
         <h2 class="card-title">Generated Mails</h2>
-      </div>
-      <div class="card-content">
-        <textarea
-          id="generatedEmailTextarea"
-          rows="10"
-          readonly
-          class="w-full p-2"
-        ></textarea>
-      </div>
+      </a>
+    </div>    
     </div>
 
     <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>

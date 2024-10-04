@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensaje</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='informal_a_formal.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="title">Mensaje</div>
+    <div class="message-box">{{ message }}</div>
+    <button class="button copy-message" onclick="copyMessage('{{ message }}')">Copiar Mensaje</button>
+  </div>
+
+  <script>
+    // Función para copiar el mensaje en la página de mensaje
+    function copyMessage(message) {
+      navigator.clipboard.writeText(message).then(() => {
+        alert('Mensaje copiado al portapapeles');
+      });
+    }
+  </script>
+</body>
+</html>

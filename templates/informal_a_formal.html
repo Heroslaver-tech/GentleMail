@@ -11,24 +11,24 @@
     <div class="title" onclick="window.location.href='/'">GentleMail</div>
     <div class="options">
       <div class="option" id="option1">
-        <div class="option-title">Option 1</div>
-        <div class="gray-box"></div>
+        <div class="option-title">{{approach1}}</div>
+        <div class="gray-box">{{message1}}</div>
         <div class="button-container">
           <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 1')">
           <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 1')">
         </div>
       </div>
       <div class="option" id="option2">
-        <div class="option-title">Option 2</div>
-        <div class="gray-box"></div>
+        <div class="option-title">{{approach2}}</div>
+        <div class="gray-box">{{message2}}</div>
         <div class="button-container">
           <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 2')">
           <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 2')">
         </div>
       </div>
       <div class="option" id="option3">
-        <div class="option-title">Option 3</div>
-        <div class="gray-box"></div>
+        <div class="option-title">{{approach3}}</div>
+        <div class="gray-box">{{message3}}</div>
         <div class="button-container">
           <img class="img" src="{{ url_for('static', filename='audio.png') }}" onclick="redirectToMessage('Mensaje para opción 3')">
           <img class="img" src="{{ url_for('static', filename='copiar.png') }}" onclick="copyMessage('Mensaje para opción 3')">

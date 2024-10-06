@@ -7,6 +7,7 @@ const generateBtn = document.getElementById('generate-btn');
 const outputDiv = document.getElementById('output');
 const listeningStatus = document.getElementById('listeningStatusText')
 const errorDiv = document.getElementById('errorAlert')
+var finalTranscript = '';
 
 if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
     outputDiv.textContent = 'Tu navegador no soporta la Web Speech API para reconocimiento de voz.';
@@ -18,7 +19,7 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
     recognition.interimResults = false; 
     recognition.continuous = true;  
 
-    let finalTranscript = '';
+    //let finalTranscript = '';
     let isRecording = false;
 
     recognition.onresult = function(event) {

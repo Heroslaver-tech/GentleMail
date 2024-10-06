@@ -50,11 +50,7 @@
           </button>
         </div>
         <div class="flex flex-wrap">
-          <img
-            src="/static/imageLanding.png"
-            width="600"
-            height="600"
-          />
+          <img src="/static/imageLanding.png" width="600" height="600" />
         </div>
       </div>
     </div>
@@ -80,8 +76,9 @@
             </p>
           </div>
           <div>
-            <div class="flex justify-around items-center mb-4">
-              
+            <div
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 justify-around items-center mb-4"
+            >
               <button
                 id="start-btn"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
@@ -103,16 +100,71 @@
             ></textarea>
             <div
               id="errorAlert"
-              class="text-red-500 mt-6 text-center"
+              class="invisible text-red-500 mb-6 text-center"
               role="alert"
-            >
-            </div>
+            >Error recognizing audio: </div>
           </div>
-          <div class="flex justify-center">
+          <div id='generate-div' class="invisible flex justify-around">
+            <div id="hear-div" class="flex flex-col justify-center items-center space-y-2">
+              <div>
+                <button
+                  id="hear-btn"
+                  class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                >
+                  <span id="listeningStatus">🎧 Hear it</span>
+                </button>
+                <button
+                id="stop-btn"
+                class="invisible bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              >
+                <span id="listeningStatus">Stop</span>
+              </button>
+              </div>
+              <div class="floating-controls">
+                <div class="control-group">
+                  <label for="rate">Velocidad (Rate):</label>
+                  <input
+                    type="range"
+                    id="rate"
+                    name="rate"
+                    min="0.5"
+                    max="2"
+                    value="1"
+                    step="0.1"
+                  />
+                  <span id="rate-value">1</span>
+                </div>
+                <div class="control-group">
+                  <label for="pitch">Tono (Pitch):</label>
+                  <input
+                    type="range"
+                    id="pitch"
+                    name="pitch"
+                    min="0"
+                    max="2"
+                    value="1"
+                    step="0.1"
+                  />
+                  <span id="pitch-value">1</span>
+                </div>
+                <div class="control-group">
+                  <label for="volume">Volumen (Volume):</label>
+                  <input
+                    type="range"
+                    id="volume"
+                    name="volume"
+                    min="0"
+                    max="1"
+                    value="1"
+                    step="0.1"
+                  />
+                  <span id="volume-value">1</span>
+                </div>
+              </div>
+            </div>
             <button
               id="generate-btn"
               class="text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow bg-blue-500 hover:bg-blue-600"
-              onclick="window.location.href='/procesamiento/'+finalTranscript"
             >
               ✉️ Generate Mails
             </button>
@@ -127,33 +179,29 @@
             </h2>
             <div class="space-y-6">
               <p class="text-center">
-                Press the button <strong> "🎤 Start Recording"</strong> to start recording
+                Please always try to say the recipient's name and reason as clearly as possible
               </p>
               <p class="text-center">
-                When you're finished, just click <strong>"Stop Recording"</strong> and review your text, you can edit it.
+                Press the button <strong> "🎤 Start Recording"</strong> to start
+                recording
               </p>
               <p class="text-center">
-                Then, click <strong>"✉️ Generate Mails"</strong> to create your new formal email, ready to send
+                When you're finished, just click
+                <strong>"Stop Recording"</strong> and review your text, you can
+                edit it.
               </p>
-          </div>
+              <p class="text-center">
+                If you want to listen your message, click <strong>"🎧 Hear it"</strong>
+              </p>
+              <p class="text-center">
+                Then, click <strong>"✉️ Generate Mails"</strong> to create your
+                new formal email, ready to send
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- results -->
-    <div
-      id="resultDiv"
-      style="display: none"
-      class="container mx-auto p-10 max-w-2xl border border-gray-200 border-solid rounded-lg shadow-xl bg-white"
-    >
-    <div class="card-header"
-    >
-      <a href="/procesamiento">
-        <h2 class="card-title">Generated Mails</h2>
-      </a>
-    </div>    
-    </div>
-
     <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>
   </body>
 </html>

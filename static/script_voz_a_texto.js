@@ -19,7 +19,6 @@ if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) 
     recognition.interimResults = false; 
     recognition.continuous = true;  
 
-    //let finalTranscript = '';
     let isRecording = false;
 
     recognition.onresult = function(event) {

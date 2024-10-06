@@ -10,11 +10,35 @@
   <div class="container">
     <div class="title">Mensaje</div>
     <div class="message-box">{{ message }}</div>
+    <button class="button regenerate" onclick="window.history.back()">Volver</button>
+    <button class="button copy-message" onclick="readMessage('{{ message }}')">Leer Mensaje</button>
     <button class="button copy-message" onclick="copyMessage('{{ message }}')">Copiar Mensaje</button>
   </div>
 
   <script>
-    // Función para copiar el mensaje en la página de mensaje
+    window.onload = function() {
+      const text = "{{ message }}";
+      if (text.trim() !== '') {
+        setTimeout(() => {
+          readMessage(text);
+        }, 1000);
+      }
+    };
+
+    function readMessage(message) {
+      if (message.trim() === '') {
+        alert('Por favor ingresa un texto.');
+        return;
+      }
+      const speech = new SpeechSynthesisUtterance(message);
+      const voices = window.speechSynthesis.getVoices();
+      speech.voice = voices.find(voice => voice.lang === 'es-ES') || voices[0];
+      speech.rate = 1;
+      speech.pitch = 1;
+      speech.volume = 1;
+      window.speechSynthesis.speak(speech);
+    }
+
     function copyMessage(message) {
       navigator.clipboard.writeText(message).then(() => {
         alert('Mensaje copiado al portapapeles');

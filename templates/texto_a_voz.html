@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mensaje</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='informal_a_formal.css') }}">
+  <style>
+    .floating-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #f9f9f9;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      z-index: 1000;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .control-group label {
+      flex: 1;
+    }
+    .control-group input {
+      flex: 2;
+      margin-right: 10px;
+    }
+    .control-group span {
+      flex: 0.5;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -14,8 +41,35 @@
     <button class="button copy-message" onclick="readMessage('{{ message }}')">Leer Mensaje</button>
     <button class="button copy-message" onclick="copyMessage('{{ message }}')">Copiar Mensaje</button>
   </div>
+  <div class="floating-controls">
+    <div class="control-group">
+      <label for="rate">Velocidad (Rate):</label>
+      <input type="range" id="rate" name="rate" min="0.5" max="2" value="1" step="0.1">
+      <span id="rate-value">1</span>
+    </div>
+    <div class="control-group">
+      <label for="pitch">Tono (Pitch):</label>
+      <input type="range" id="pitch" name="pitch" min="0" max="2" value="1" step="0.1">
+      <span id="pitch-value">1</span>
+    </div>
+    <div class="control-group">
+      <label for="volume">Volumen (Volume):</label>
+      <input type="range" id="volume" name="volume" min="0" max="1" value="1" step="0.1">
+      <span id="volume-value">1</span>
+    </div>
+  </div>
 
   <script>
+    document.getElementById('rate').addEventListener('input', function() {
+      document.getElementById('rate-value').textContent = this.value;
+    });
+    document.getElementById('pitch').addEventListener('input', function() {
+      document.getElementById('pitch-value').textContent = this.value;
+    });
+    document.getElementById('volume').addEventListener('input', function() {
+      document.getElementById('volume-value').textContent = this.value;
+    });
+
     window.onload = function() {
       const text = "{{ message }}";
       if (text.trim() !== '') {
@@ -33,9 +87,9 @@
       const speech = new SpeechSynthesisUtterance(message);
       const voices = window.speechSynthesis.getVoices();
       speech.voice = voices.find(voice => voice.lang === 'es-ES') || voices[0];
-      speech.rate = 1;
-      speech.pitch = 1;
-      speech.volume = 1;
+      speech.rate = parseFloat(document.getElementById('rate').value);
+      speech.pitch = parseFloat(document.getElementById('pitch').value);
+      speech.volume = parseFloat(document.getElementById('volume').value);
       window.speechSynthesis.speak(speech);
     }
 

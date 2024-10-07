@@ -85,12 +85,14 @@ if (
       recordingBtn.innerHTML = "🎤 Start Recording";
       listeningStatus.innerHTML = "Not Listening";
       recognition.stop();
+      toggleButtons(false)
     } else {
       isRecording = true;
       recordingBtn.style = "background: #EF4444";
       recordingBtn.innerHTML = "Stop Recording";
       listeningStatus.innerHTML = "Listening...";
       recognition.start();
+      toggleButtons(true,"start-btn")
     }
   });
 
@@ -131,12 +133,14 @@ if (
         speech.onend = function () {
           hearBtn.innerText = "🎧 Hear it";
           stopBtn.style = "visibility: hidden";
+          toggleButtons(false)
         };
 
         // Este bloque asegurará que se cancele cualquier síntesis en curso antes de hablar nuevamente
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(speech);
-
+        toggleButtons(true, 'hear-btn')
+        stopBtn.disabled = false;
         stopBtn.style = "visibility: visible";
       }
 
@@ -152,6 +156,17 @@ if (
       window.speechSynthesis.cancel();
       hearBtn.innerText = "🎧 Hear it";
       stopBtn.style = "visibility: hidden";
+      toggleButtons(false)
     }
   });
+
+  function toggleButtons(disable, currentButtonId) {
+    // Seleccionar todos los botones que no sean el botón actual y desactivarlos o activarlos
+    document.querySelectorAll("button").forEach((btn) => {
+      if (btn.id !== currentButtonId) {
+        btn.disabled = disable;
+      }
+    });
+  }
+  
 }

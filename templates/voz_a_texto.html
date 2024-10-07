@@ -13,17 +13,16 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style>
+      button:disabled {
+        opacity: 0.5; /* Ajusta la transparencia de los botones deshabilitados */
+        cursor: not-allowed; /* Cambia el cursor para indicar que no es interactivo */
+      }
+    </style>
   </head>
   <body
     class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-green-500"
   >
-    <!-- <h2>Voz a Texto</h2>
-    <button id="start-btn">Iniciar Grabación</button>
-    <button id="stop-btn">Detener Grabación</button>
-    <p><strong>Tu grabación fue:</strong></p>
-    <div id="output"></div> -->
-
-    <!-- present div -->
     <div
       id="presentDiv"
       class="h-screen lg:h-auto flex justify-between p-10 max-w-6xl border-gray-200 border-solid rounded-lg shadow-xl bg-white"
@@ -122,7 +121,7 @@
               </div>
               <div class="floating-controls">
                 <div class="control-group">
-                  <label for="rate">Velocidad (Rate):</label>
+                  <label for="rate">Rate:</label>
                   <input
                     type="range"
                     id="rate"
@@ -135,7 +134,7 @@
                   <span id="rate-value">1</span>
                 </div>
                 <div class="control-group">
-                  <label for="pitch">Tono (Pitch):</label>
+                  <label for="pitch">Pitch:</label>
                   <input
                     type="range"
                     id="pitch"
@@ -148,7 +147,7 @@
                   <span id="pitch-value">1</span>
                 </div>
                 <div class="control-group">
-                  <label for="volume">Volumen (Volume):</label>
+                  <label for="volume">Volume:</label>
                   <input
                     type="range"
                     id="volume"
@@ -202,6 +201,6 @@
         </div>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='script_voz_a_texto.js') }}"></script>
+    <script src="{{ url_for('static', filename='script_edit_text.js') }}"></script>
   </body>
 </html>

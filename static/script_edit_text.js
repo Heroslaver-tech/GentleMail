@@ -154,6 +154,7 @@ if (
   stopBtn.addEventListener("click", function () {
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
+      hearBtn.innerText = "🎧 Hear it";
       stopBtn.style = "visibility: hidden";
       toggleButtons(false)
     }

@@ -1,67 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GentleMail</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GentleMail</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='informal_a_formal.css') }}">
-</head>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='play.png') }}"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='pause.png') }}"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='stop.png') }}"
+      type="image/png"
+    />
+    <!-- <link rel="stylesheet" href="/static/informal_a_formal.css" /> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      button:disabled {
+        opacity: 0.5; /* Ajusta la transparencia de los botones deshabilitados */
+        cursor: not-allowed; /* Cambia el cursor para indicar que no es interactivo */
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="container">
-    <div class="title" onclick="window.location.href='/'">GentleMail</div>
-    <div class="options">
-      <div class="option" id="option1">
-        <div class="option-title">{{approach1}}</div>
-        <div class="gray-box" id="message1">{{message1}}</div>
-        <div class="button-container">
-          <img class="img" src="{{ url_for('static', filename='audio.png') }}"
-            onclick="redirectToMessage('Mensaje para opción 1')">
-          <img class="img" src="{{ url_for('static', filename='copiar.png') }}" 
-            onclick="copyMessage('message1')">
+  <body
+    class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-green-500"
+  >
+    <div class="h-screen lg:flex lg:justify-center lg:items-center">
+      <div
+        class="lg:h-auto p-10 lg:h-auto lg:max-w-6xl border-gray-200 border-solid rounded-lg shadow-xl bg-white"
+      >
+        <div
+          class="text-3xl lg:text-4xl font-bold mb-4 text-blue-500 text-center"
+          onclick="window.location.href='/'"
+        >
+          GentleMail
         </div>
-      </div>
-      <div class="option" id="option2">
-        <div class="option-title">{{approach2}}</div>
-        <div class="gray-box" id="message2">{{message2}}</div>
-        <div class="button-container">
-          <img class="img" src="{{ url_for('static', filename='audio.png') }}"
-            onclick="redirectToMessage('Mensaje para opción 2')">
-          <img class="img" src="{{ url_for('static', filename='copiar.png') }}"
-            onclick="copyMessage('message2')">
+        <p class="text-center pb-2">
+          Your emails are ready, but first you can configure the voice settings
+          to hear better
+        </p>
+        <div
+          class="floating-controls border-2 border-gray-200 shadow-lg p-2 mb-4 text-sm flex flex-col items-center"
+        >
+          <div class="control-group">
+            <label for="rate">Rate:</label>
+            <input
+              type="range"
+              id="rate"
+              name="rate"
+              min="0.5"
+              max="2"
+              value="1"
+              step="0.1"
+            />
+            <span id="rate-value">1</span>
+          </div>
+          <div class="control-group">
+            <label for="pitch">Pitch:</label>
+            <input
+              type="range"
+              id="pitch"
+              name="pitch"
+              min="0"
+              max="2"
+              value="1"
+              step="0.1"
+            />
+            <span id="pitch-value">1</span>
+          </div>
+          <div class="control-group">
+            <label for="volume">Volume:</label>
+            <input
+              type="range"
+              id="volume"
+              name="volume"
+              min="0"
+              max="1"
+              value="1"
+              step="0.1"
+            />
+            <span id="volume-value">1</span>
+          </div>
         </div>
-      </div>
-      <div class="option" id="option3">
-        <div class="option-title">{{approach3}}</div>
-        <div class="gray-box" id="message3">{{message3}}</div>
-        <div class="button-container">
-          <img class="img" src="{{ url_for('static', filename='audio.png') }}"
-            onclick="redirectToMessage('Mensaje para opción 3')">
-          <img class="img" src="{{ url_for('static', filename='copiar.png') }}"
-            onclick="copyMessage('message3')">
+        <div
+          class="flex flex-col lg:flex-row lg:space-x-10 justify-center items-center mb-10 lg:mb-2"
+        >
+          <div
+            class="flex flex-col w-full justify-center items-center mb-10 lg:mb-0"
+            id="option1"
+          >
+            <div class="text-center text-2xl mb-6">{{approach1}}</div>
+            <textarea
+              id="textArea1"
+              placeholder="Your speech will appear here..."
+              rows="15"
+              class="w-full p-2 bg-gray-300 mb-4 lg:mb-0 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
+              disabled
+            >
+{{message1}}</textarea
+            >
+            <div class="flex flex-row justify-around w-full flex-wrap">
+              <button
+                id="button1"
+                class="w-1/3"
+                onclick="readMessage('textArea1','buttonImage1','stopButton1', 'button1')"
+              >
+                <img id="buttonImage1" src="/static/play.png" />
+              </button>
+              <button
+                id="stopButton1"
+                class="w-1/3 invisible"
+                onclick="stopSpeech('textArea1','stopButton1')"
+              >
+                <img src="/static/stop.png" />
+              </button>
+              <button class="w-1/3" onclick="copyMessage('textArea1')">
+                <img src="/static/copy.png" />
+              </button>
+            </div>
+          </div>
+          <div
+            class="flex flex-col w-full justify-center items-center mb-10 lg:mb-0"
+            id="option2"
+          >
+            <div class="text-center text-2xl mb-6">{{approach2}}</div>
+            <textarea
+              id="textArea2"
+              placeholder="Your speech will appear here..."
+              rows="15"
+              class="w-full p-2 bg-gray-300 mb-4 lg:mb-0 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
+              disabled
+            >
+{{message2}}</textarea
+            >
+            <div class="flex flex-row justify-around w-full flex-wrap">
+              <button
+                id="button2"
+                class="w-1/3"
+                onclick="readMessage('textArea2','buttonImage2','stopButton2', 'button2')"
+              >
+                <img id="buttonImage2" src="/static/play.png" />
+              </button>
+              <button
+                id="stopButton2"
+                class="w-1/3 invisible"
+                onclick="stopSpeech('textArea2','stopButton2')"
+              >
+                <img src="/static/stop.png" />
+              </button>
+              <button class="w-1/3" onclick="copyMessage('textArea2')">
+                <img src="/static/copy.png" />
+              </button>
+            </div>
+          </div>
+          <div
+            class="flex flex-col w-full justify-center items-center mb-10 lg:mb-0"
+            id="option3"
+          >
+            <div class="text-center text-2xl mb-6">{{approach3}}</div>
+            <textarea
+              id="textArea3"
+              placeholder="Your speech will appear here..."
+              rows="15"
+              class="w-full p-2 bg-gray-300 mb-4 lg:mb-0 resize-none rounded-md border-2 border-gray-300 focus:border-blue-500 rounded-lg"
+              disabled
+            >
+{{message3}}</textarea
+            >
+            <div class="flex flex-row justify-around w-full flex-wrap">
+              <button
+                id="button3"
+                class="w-1/3"
+                onclick="readMessage('textArea3','buttonImage3','stopButton3', 'button3')"
+              >
+                <img id="buttonImage3" src="/static/play.png" />
+              </button>
+              <button
+                id="stopButton3"
+                class="w-1/3 invisible"
+                onclick="stopSpeech('textArea3','stopButton3')"
+              >
+                <img src="/static/stop.png" />
+              </button>
+              <button class="w-1/3" onclick="copyMessage('textArea3')">
+                <img src="/static/copy.png" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="button-container flex justify-center">
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            onclick="window.location.href='/'"
+          >
+            Write other mail
+          </button>
         </div>
       </div>
     </div>
-    <div class="button-container">
-      <button class="button write" onclick="window.location.href='/'">Write other mail</button>
-    </div>
-  </div>
-
-  <script>
-    function redirectToMessage(message) {
-      window.location.href = `/mensaje?text=${encodeURIComponent(message)}`;
-    }
-
-    function copyMessage(messageId) {
-      const message = document.getElementById(messageId).innerText; 
-      navigator.clipboard.writeText(message).then(() => {
-        alert('Mensaje copiado al portapapeles');
-      }).catch(err => {
-        console.error('Error al copiar al portapapeles: ', err);
-      });
-    }
-  </script>
-</body>
-
+    <script src="{{ url_for('static', filename='script_generate_mail.js') }}"></script>
+  </body>
 </html>
